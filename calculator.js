@@ -4,7 +4,7 @@ screen.innerText = "0";
 let total = 0;
 let previousClick;
 let init = 0;
-let operator;
+let operator = "";
 
 number.addEventListener('click', (event) =>{
     if(isNaN(parseInt(event.target.innerText))){
@@ -34,10 +34,13 @@ function symbolButtons(value){
         previousClick = "symbol";
         init = 0;
     }else if(value === "+" && previousClick === "number"){
+        if(operator === "+"){
+            total += parseInt(screen.innerText);
+            screen.innerText = total;
+            console.log(screen.innerText);
+        }
         console.log("plus checked")
-        total += parseInt(screen.innerText);
-        screen.innerText = total;
-        console.log(screen.innerText);
+        total = parseInt(screen.innerText);
         previousClick = "symbol";
         operator = "+";
     }else if(value === "-" && previousClick === "number"){
@@ -66,14 +69,16 @@ function symbolButtons(value){
     // }
     }else if(value === "="){
         if(operator === "+"){
+            console.log("operator checked")
             total += parseInt(screen.innerText);
             screen.innerText = total;
+            console.log(total);
             previousClick = "number";
             operator = "=";
         }else if(operator === "-"){
             total -= parseInt(screen.innerText);
             screen.innerText = total;
-            previousClick = "symbol";
+            previousClick = "number";
         }
     }
 }
