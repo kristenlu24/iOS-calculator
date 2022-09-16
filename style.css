@@ -14,10 +14,10 @@ button:active{
 }
 .allButtons{
     display: grid;
-    grid-template-rows: repeat(6, 102px);
+    grid-template-rows: repeat(5, 102px);
     background-color: black;
     width: 409px;
-    height: 610px;
+    height: 508px;
 }
 .screen{
     color:aliceblue;
@@ -26,13 +26,13 @@ button:active{
     padding-top: 30px;
     padding-right: 10px;
     font-family: 'Courier New', Courier, monospace;
+    background-color: black;
+    width: 399px;
+    height: 60px;
 }
-.firstSection{
-    display:grid;
-    grid-template-columns: 206px 103px 100px;
-}
+
 .letterC{
-    width: 98.5%;
+    width: 49.6%;
 }
 .lastSection{
     display: grid;
