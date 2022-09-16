@@ -37,13 +37,11 @@ function symbolButtons(value){
         if(operator === "+"){
             total += parseInt(screen.innerText);
             screen.innerText = total;
-            console.log(screen.innerText);
         }
         if(operator === "-"){
             total -= parseInt(screen.innerText);
             screen.innerText = total;
         }
-        console.log("plus checked")
         total = parseInt(screen.innerText);
         previousClick = "symbol";
         operator = "+";
@@ -51,16 +49,14 @@ function symbolButtons(value){
         if(init === 0){
             total = parseInt(screen.innerText);
             init = 1;
-            console.log(total);
         }else if(operator === "-"){
             total -= parseInt(screen.innerText);
             screen.innerText = total;
-            console.log(screen.innerText);
         }else if(operator === "+"){
             total += parseInt(screen.innerText);
             screen.innerText = total;
         }
-        console.log("minus checked")
+        total = parseInt(screen.innerText);
         previousClick = "symbol";
         operator = "-";
     // }else if(value === "&#215;" && previousClick === "number"){
@@ -86,6 +82,7 @@ function symbolButtons(value){
             total -= parseInt(screen.innerText);
             screen.innerText = total;
             previousClick = "number";
+            operator = "=";
         }
     }
 }
