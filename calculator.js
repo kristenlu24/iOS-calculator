@@ -15,12 +15,9 @@ number.addEventListener('click', (event) =>{
 })
 
 function numberButtons(value){
-    if(screen.innerText === "0"){
+    if(screen.innerText === "0" || previousClick === "symbol"){
         screen.innerText = value;
         previousClick = "number"
-    }else if(previousClick === "symbol"){
-        screen.innerText = value;
-        previousClick = "number";
     }else{
         screen.innerText += value;
         previousClick = "number";
@@ -33,32 +30,47 @@ function symbolButtons(value){
         total = 0;
         previousClick = "symbol";
         init = 0;
-    }else if(value === "+" && previousClick === "number"){
-        if(operator === "+"){
-            total += parseInt(screen.innerText);
-            screen.innerText = total;
-        }
-        if(operator === "-"){
-            total -= parseInt(screen.innerText);
-            screen.innerText = total;
-        }
-        total = parseInt(screen.innerText);
-        previousClick = "symbol";
-        operator = "+";
-    }else if(value === "-" && previousClick === "number"){
-        if(init === 0){
+    }else if(value === "+"){
+        if(previousClick === "number"){
+            if(operator === "+"){
+                total += parseInt(screen.innerText);
+                screen.innerText = total;
+            }
+            if(operator === "-"){
+                total -= parseInt(screen.innerText);
+                screen.innerText = total;
+            }
             total = parseInt(screen.innerText);
+            previousClick = "symbol";
+            operator = "+";
             init = 1;
-        }else if(operator === "-"){
-            total -= parseInt(screen.innerText);
+        }else{
+            total = parseInt(screen.innerText);
             screen.innerText = total;
-        }else if(operator === "+"){
-            total += parseInt(screen.innerText);
-            screen.innerText = total;
+            previousClick = "symbol";
+            operator = "+";
         }
-        total = parseInt(screen.innerText);
-        previousClick = "symbol";
-        operator = "-";
+    }else if(value === "-"){
+        if(previousClick === "number"){
+            if(init === 0){
+                total = parseInt(screen.innerText);
+                init = 1;
+            }else if(init === 1 && operator === "-"){
+                total -= parseInt(screen.innerText);
+                screen.innerText = total;
+            }else if(init === 1 && operator === "+"){
+                total += parseInt(screen.innerText);
+                screen.innerText = total;
+            }
+            total = parseInt(screen.innerText);
+            previousClick = "symbol";
+            operator = "-";
+        }else{
+            total = parseInt(screen.innerText);
+            screen.innerText = total;
+            previousClick = "symbol";
+            operator = "-";
+        }
     // }else if(value === "&#215;" && previousClick === "number"){
     //     total *= parseInt(screen.innerText);
     //     screen.innerText = total;
@@ -72,10 +84,8 @@ function symbolButtons(value){
     // }
     }else if(value === "=" && previousClick === "number"){
         if(operator === "+"){
-            console.log("operator checked")
             total += parseInt(screen.innerText);
             screen.innerText = total;
-            console.log(total);
             previousClick = "number";
             operator = "=";
         }else if(operator === "-"){
