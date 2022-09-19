@@ -1,2 +1,2 @@
 # calculator
-Developing a calculator application
+Developing a calculator application using JavaScript
