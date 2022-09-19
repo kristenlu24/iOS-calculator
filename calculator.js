@@ -3,7 +3,6 @@ const screen = document.querySelector(".screen");
 screen.innerText = "0";
 let total = 0;
 let previousClick;
-let init = 0;
 let operator = "";
 
 number.addEventListener('click', (event) =>{
@@ -25,74 +24,137 @@ function numberButtons(value){
 }
 
 function symbolButtons(value){
+    // Reset
     if(value === "C"){
         screen.innerText = "0";
         total = 0;
         previousClick = "symbol";
         init = 0;
+    // Addition
     }else if(value === "+"){
         if(previousClick === "number"){
             if(operator === "+"){
-                total += parseInt(screen.innerText);
+                total += parseFloat(screen.innerText);
+                screen.innerText = total;
+            }else if(operator === "-"){
+                total -= parseFloat(screen.innerText);
+                screen.innerText = total;
+            }else if(operator === "*"){
+                total *= parseFloat(screen.innerText);
+                screen.innerText = total;
+            }else if(operator === "/"){
+                total /= parseFloat(screen.innerText);
                 screen.innerText = total;
             }
-            if(operator === "-"){
-                total -= parseInt(screen.innerText);
-                screen.innerText = total;
-            }
-            total = parseInt(screen.innerText);
+            total = parseFloat(screen.innerText);
             previousClick = "symbol";
             operator = "+";
-            init = 1;
+            total != 0;
         }else{
-            total = parseInt(screen.innerText);
+            total = parseFloat(screen.innerText);
             screen.innerText = total;
             previousClick = "symbol";
             operator = "+";
         }
+    // Substraction
     }else if(value === "-"){
         if(previousClick === "number"){
-            if(init === 0){
-                total = parseInt(screen.innerText);
-                init = 1;
-            }else if(init === 1 && operator === "-"){
-                total -= parseInt(screen.innerText);
+            if(total > 0 && operator === "-"){
+                total -= parseFloat(screen.innerText);
                 screen.innerText = total;
-            }else if(init === 1 && operator === "+"){
-                total += parseInt(screen.innerText);
+            }else if(total > 0 && operator === "+"){
+                total += parseFloat(screen.innerText);
+                screen.innerText = total;
+            }else if(total > 0 && operator === "*"){
+                total *= parseFloat(screen.innerText);
+                screen.innerText = total;
+            }else if(total > 0 && operator === "/"){
+                total /= parseFloat(screen.innerText);
                 screen.innerText = total;
             }
-            total = parseInt(screen.innerText);
+            total = parseFloat(screen.innerText);
             previousClick = "symbol";
             operator = "-";
         }else{
-            total = parseInt(screen.innerText);
+            total = parseFloat(screen.innerText);
             screen.innerText = total;
             previousClick = "symbol";
             operator = "-";
         }
-    // }else if(value === "&#215;" && previousClick === "number"){
-    //     total *= parseInt(screen.innerText);
-    //     screen.innerText = total;
-    //     console.log(screen.innerText);
-    //     previousClick = "symbol";
-    // }else if(value === "&#8592;" && previousClick === "number"){
-    //     total /= parseInt(screen.innerText);
-    //     screen.innerText = total;
-    //     console.log(screen.innerText);
-    //     previousClick = "symbol";
-    // }
+    // Production
+    }else if(value === "×"){
+        if(previousClick === "number"){
+            if(total > 0 && operator === "-"){
+                total -= parseFloat(screen.innerText);
+                screen.innerText = total;
+            }else if (total > 0 && operator === "+"){
+                total += parseFloat(screen.innerText);
+                screen.innerText = total;
+            }else if (total > 0 && operator === "*"){
+                total *= parseFloat(screen.innerText);
+                screen.innerText = total;
+            }else if (total > 0 && operator === "/"){
+                total /= parseFloat(screen.innerText);
+                screen.innerText = total;
+            }
+            total = parseFloat(screen.innerText);
+            previousClick = "symbol";
+            operator = "*";
+        }else{
+            total = parseFloat(screen.innerText);
+            screen.innerText = total;
+            previousClick = "symbol";
+            operator = "*";
+        }
+    // Difference
+    }else if(value === "÷"){
+        if(previousClick === "number"){
+            if(total > 0 && operator === "-"){
+                total -= parseFloat(screen.innerText);
+                screen.innerText = total;
+            }else if (total > 0 && operator === "+"){
+                total += parseFloat(screen.innerText);
+                screen.innerText = total;
+            }else if (total > 0 && operator === "*"){
+                total *= parseFloat(screen.innerText);
+                screen.innerText = total;
+            }else if (total > 0 && operator === "/"){
+                total /= parseFloat(screen.innerText);
+                screen.innerText = total;
+            }
+            total = parseFloat(screen.innerText);
+            previousClick = "symbol";
+            operator = "/";
+        }else{
+            total = parseFloat(screen.innerText);
+            screen.innerText = total;
+            previousClick = "symbol";
+            operator = "/";
+        }
+    // Equal
     }else if(value === "=" && previousClick === "number"){
         if(operator === "+"){
-            total += parseInt(screen.innerText);
+            total += parseFloat(screen.innerText);
             screen.innerText = total;
             previousClick = "number";
             operator = "=";
         }else if(operator === "-"){
-            total -= parseInt(screen.innerText);
+            total -= parseFloat(screen.innerText);
+            screen.innerText = total;
+            previousClick = "number";
+            operator = "=";
+        }else if(operator === "*"){
+            total *= parseFloat(screen.innerText);
+            screen.innerText = total;
+            previousClick = "number";
+            operator = "=";
+        }else if(operator === "/"){
+            total /= parseFloat(screen.innerText);
             screen.innerText = total;
             previousClick = "number";
             operator = "=";
         }
+    }else if(value === "←"){
+        screen.innerText = screen.innerText.substring(0, screen.innerText.length-1);
     }
 }
